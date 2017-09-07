@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.database.subscribe('entries', data=>{
+      data = data || {};
       this.entries = ObjectUtil.toArray(data);
     });
   }
