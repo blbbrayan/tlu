@@ -1,10 +1,11 @@
+import {Race} from "./race.model";
 export class Character{
 
-    name;
-    race;
+    name: string;
+    red: number; // health, strength
+    blue: number; // mana, intelligence
+    yellow: number; // agility, crit-chance
 
-    red; // health, strength
-    blue; // mana, intelligence
-    yellow; // agility, crit-chance
+    raceId: number;
 
 }

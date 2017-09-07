@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../services/data.service";
+import {ObjectUtil} from "../utils/object.util";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  entry: string;
+  entries: any[];
+
+  constructor(private database: DataService) {}
 
   ngOnInit() {
+    this.database.subscribe('entries', data=>{
+      this.entries = ObjectUtil.toArray(data);
+    });
+  }
+
+  submit(){
+    this.database.listAdd('entries', {value: this.entry});
+    this.entry = "";
   }
 
 }

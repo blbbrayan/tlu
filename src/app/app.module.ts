@@ -8,8 +8,9 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {RouterModule} from "@angular/router";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-import {AssetService} from "./services/asset.service";
 import { HomeComponent } from './home/home.component';
+import {DataService} from "./services/data.service";
+import { AdminComponent } from './admin/admin.component';
 
 const ROUTES = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -24,7 +25,8 @@ const ROUTES = [
     AppComponent,
     LoginComponent,
     CreateCharacterComponent,
-    HomeComponent
+    HomeComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,19 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [AssetService, Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [DataService, Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(){
+    window["firebase"].initializeApp({
+      apiKey: "AIzaSyBGIsOo1Kd2ULOJYxnBSQErpz704orxbBk",
+      authDomain: "todd-lewis-universe.firebaseapp.com",
+      databaseURL: "https://todd-lewis-universe.firebaseio.com",
+      projectId: "todd-lewis-universe",
+      storageBucket: "todd-lewis-universe.appspot.com",
+      messagingSenderId: "285267866986"
+    });
+    console.log('data loaded');
+  }
+}
