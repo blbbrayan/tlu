@@ -8,10 +8,13 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {RouterModule} from "@angular/router";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {AssetService} from "./services/asset.service";
+import { HomeComponent } from './home/home.component';
 
 const ROUTES = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'create-character', component: CreateCharacterComponent},
   {path: '**', redirectTo: '/login'}
 ];
@@ -20,7 +23,8 @@ const ROUTES = [
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateCharacterComponent
+    CreateCharacterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [AssetService, Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

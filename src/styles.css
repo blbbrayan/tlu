@@ -1,1 +1,123 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("assets/materialize/css/materialize.min.css");
+
+/*badge*/
+
+.g-badge{
+    background: url("assets/ui/badge.png") no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent !important;
+    color: white;
+    padding: 0 10px;
+    margin-left: 2px;
+}
+
+/*button*/
+
+.g-btn{
+    user-select: none;
+}
+
+.btn-floating.g-btn{
+    background: url("assets/ui/button-circle.png") no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent !important;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+
+.btn-floating.g-btn i{
+    font-size: 2rem;
+}
+
+.btn-floating.g-btn:hover i{
+    color: yellow;
+}
+
+.btn-floating.g-btn:active{
+    background: url("assets/ui/button-circle-active.png") no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent !important;
+}
+
+.btn.g-btn{
+    background: url("assets/ui/button.png") no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    font-weight: bold;
+    height: 42px;
+    line-height: 40px;
+    color: white;
+    transition: .5s;
+}
+
+.btn.g-btn:hover{
+    color: yellow;
+}
+
+.btn.g-btn:active{
+    background: url("assets/ui/button-active.png") no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent !important;
+}
+
+/*window*/
+
+.main-window{
+    margin-top: 5%;
+    animation: window-opening 1.3s;
+}
+@keyframes window-opening{
+    0%{
+        margin-top: -100%;
+        opacity: .6;
+        border-radius: 100%;
+        border: 8px solid red;
+    }
+    50%{
+        border: 4px solid orange;
+    }
+    70%{
+        margin-top: 10%;
+    }
+    80%{
+        border: none;
+    }
+    100%{
+        margin-top: 5%;
+        opacity: 1;
+        border-radius: 0;
+    }
+}
+
+.window{
+    background: url("assets/ui/window.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.window .card-title{
+    font-weight: bold;
+    margin-left: 3%;
+}
+
+.window .card-content{
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.window input{
+    border: 2px solid rgba(0,0,0,.3) !important;
+    color: white;
+    height: 2rem;
+    font-size: 2rem;
+    padding-left: 5px;
+}
+
+.window .dropdown-content{
+    background: url(assets/ui/window.png) 0 0 / 100% 100% no-repeat;
+    padding: 20px;
+}
+.window li:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+}
