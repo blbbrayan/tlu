@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from "../services/data.service";
 import {ObjectUtil} from "../utils/object.util";
+import {Character} from "../services/models/character.model";
 
 @Component({
   selector: 'app-home',
@@ -9,21 +10,17 @@ import {ObjectUtil} from "../utils/object.util";
 })
 export class HomeComponent implements OnInit {
 
-  entry: string;
-  entries: any[];
-
+    player: Character;
+    
   constructor(private database: DataService) {}
 
-  ngOnInit() {
-    this.database.subscribe('entries', data=>{
-      data = data || {};
-      this.entries = ObjectUtil.toArray(data);
-    });
+  ngOnInit() { 
+    this.player = new Character("Steve", 10, 8, 6);
+    console.log(this.player);
   }
-
-  submit(){
-    this.database.listAdd('entries', {value: this.entry});
-    this.entry = "";
-  }
+    
+expNeeded(){
+    return (this.player.level * 5) * 10;
+}
 
 }

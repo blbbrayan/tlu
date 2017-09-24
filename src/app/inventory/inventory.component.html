@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="card">
+        <span class="card-title">Inventory</span>
+        <div class="item" *ngFor="let item of inventory">
+            <span>{{item}}</span>
+        </div>
+        <h3>Weapons</h3>
+        <div class="item" *ngFor="let item of weapons">
+            <span>{{item}}</span>
+        </div>
+        <h3>Armor</h3>
+        <div class="item" *ngFor="let item of armor">
+            <span>{{item}}</span>
+        </div>
+    </div>
+</div>

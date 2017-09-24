@@ -1,0 +1,27 @@
+.card {
+    padding: 15px;
+}
+
+.item {
+    padding: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: .3s;
+}
+
+.item span {
+    padding-left: 15px;
+    transition: .3s;
+}
+
+.item:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.item:hover span {
+    padding-left: 20px;
+}
+
+.item:active span{
+    padding-left: 30px;
+}

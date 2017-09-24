@@ -1,3 +1,20 @@
-<input [(ngModel)]="entry">
-<button (click)="submit()">Create entry</button>
-<div *ngFor="let e of entries">{{e.value}}</div>
+<div class="container">
+    <div class="row">
+        <div class="card col s4" *ngIf="player">
+            <span class="card-title">{{player.name}} <strong>{{player.level}}</strong></span>
+            <div>Experience: {{player.experience}} / {{expNeeded()}}</div>
+            <div>Red: {{player.red}}</div>
+            <div>Blue: {{player.blue}}</div>
+            <div>Yellow: {{player.yellow}}</div>
+            <a class="btn" [routerLink]="['/inventory']">Inventory</a>
+        </div>
+        <div class="card col s8">
+            <span class="card-title">Quest Postings</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card col s4">
+            <span class="card-title">Social</span>
+        </div>
+    </div>
+</div>

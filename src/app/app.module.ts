@@ -11,22 +11,31 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { HomeComponent } from './home/home.component';
 import {DataService} from "./services/data.service";
 import { AdminComponent } from './admin/admin.component';
+import { PlayGardenComponent } from './play/play-garden/play-garden.component';
+import { PlaySingleBattleComponent } from './play/play-single-battle/play-single-battle.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 const ROUTES = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'inventory', component: InventoryComponent},
   {path: 'create-character', component: CreateCharacterComponent},
+    {path: 'play/garden', component: PlayGardenComponent},
+    {path: 'play/battle', component: PlaySingleBattleComponent},
   {path: '**', redirectTo: '/login'}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent, 
     CreateCharacterComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    PlayGardenComponent,
+    PlaySingleBattleComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
