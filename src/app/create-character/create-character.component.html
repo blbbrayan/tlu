@@ -6,14 +6,14 @@
         <div class="window-content">
           <div class="row">
             <h4 class="center-align">Name</h4>
-            <input class="brown lighten-4 col s6 push-s3">
+            <input class="brown lighten-4 col s6 push-s3" [(ngModel)]="tempCharacter.name">
           </div>
 
           <div class="row">
             <h4 class="center-align">Race</h4>
-            <a class="dropdown-button btn g-btn col s6 push-s3" data-activates='race-dd'>{{selectedRace || "Race"}}</a>
+            <a class="dropdown-button btn g-btn col s6 push-s3" data-activates='race-dd'>{{selectedRace?.name || "Race"}}</a>
             <ul id='race-dd' class='dropdown-content'>
-              <li *ngFor="let race of races"><a class="black-text" (click)="selectedRace = race;">{{race}}</a></li>
+              <li *ngFor="let race of races; let i = index"><a class="black-text" (click)="selectRace(race, i)">{{race.name}}</a></li>
             </ul>
           </div>
 
@@ -29,7 +29,7 @@
 
           <div class="row space">
             <a class="btn g-btn col s6" [routerLink]="['/login']">Cancel</a>
-            <a class="btn g-btn col s6">Create</a>
+            <a class="btn g-btn col s6" (click)="submit()">Create</a>
           </div>
 
         </div>

@@ -1,6 +1,13 @@
 import {Character} from "./character.model";
 export class Account{
     
-    characterId: string; 
+    id:string;
+    email: string;
+    password: string;
+    characterId: string;
+    
+    constructor(){
+        
+    }
     
 }

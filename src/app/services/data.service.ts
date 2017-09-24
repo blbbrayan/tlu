@@ -15,9 +15,9 @@ export class DataService {
     this.database(path).set(obj);
   }
 
-  get(path: string){
+  get(path: string, onloaded){
     this.database(path).once('value').then(function(snapshot) {
-      return snapshot.val();
+      onloaded(snapshot.val());
     });
   }
 

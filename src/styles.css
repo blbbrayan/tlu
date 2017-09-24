@@ -1,6 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("assets/materialize/css/materialize.min.css");
 
+.fullscreen{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+
 /*badge*/
 
 .g-badge{

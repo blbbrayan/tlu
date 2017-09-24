@@ -8,4 +8,11 @@ export class Monster{
     
     combat: Combat;
     
+    constructor(){
+        this.name = "";
+        this.red = 0;
+        this.blue = 0;
+        this.yellow = 0;
+    }
+    
 }

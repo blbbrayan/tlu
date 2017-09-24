@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Race } from '../services/models/race.model';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+    links: {target: string, name: string }[];
+    
+  constructor(private router: Router) { 
+    
   }
+  ngOnInit() { 
+    this.links = [
+        { target: '/admin/char', name: 'Character'},
+        { target: '/admin/item', name: 'Item'},
+        { target: '/admin/monster', name: 'Monster'},
+        { target: '/admin/race', name: 'Race'},
+        { target: '/admin/zone', name: 'Zone'},
+
+    ]
+  }
+    open(link){
+        this.router.navigate([link]);
+    }
 
 }
