@@ -24,6 +24,6 @@ export class HomeComponent implements OnInit {
   submit(){
     this.database.listAdd('entries', {value: this.entry});
     this.entry = "";
-  }
+  } 
 
 }

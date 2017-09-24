@@ -1,0 +1,59 @@
+<nav>
+    <div class="nav-wrapper admin-nav">
+        <div class="col s12">
+            <a [routerLink]="['/admin']" class="breadcrumb">Admin</a>
+            <a [routerLink]="['/admin/race']" class="breadcrumb">Race</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Create Race</span>
+                <div class="row">
+                    <h4>Name</h4>
+                    <input [(ngModel)]="tempRace.name">
+                    <h4>Desc</h4>
+                    <input [(ngModel)]="tempRace.desc">
+                </div>
+                <div class="row">
+                    <input class="col s4" type="number" placeholder="red" [(ngModel)]="tempRace.red">
+                    <input class="col s4" type="number" placeholder="blue" [(ngModel)]="tempRace.blue">
+                    <input class="col s4" type="number" placeholder="yellow" [(ngModel)]="tempRace.yellow">
+                    <div class="row hugme">
+                        <label class="col s4">red</label>
+                        <label class="col s4">blue</label>
+                        <label class="col s4">yellow</label>
+                    </div>
+                </div>
+                <a class="btn admin-btn" (click)="submit()">Create</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">View Races</span>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Desc</th>
+                        <th>Red</th>
+                        <th>Blue</th>
+                        <th>Yellow</th>
+                        <th>ID</th>
+                        <th></th>
+                    </tr>
+                    <tr *ngFor="let item of races">
+                        <td>{{item.name}}</td>
+                        <td>{{item.desc}}</td>
+                        <td>{{item.red}}</td>
+                        <td>{{item.blue}}</td>
+                        <td>{{item.yellow}}</td>
+                        <td>{{item.id}}</td>
+                        <td><a (click)="delete(item.id)" class="red-text">X</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

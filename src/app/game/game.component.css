@@ -1,0 +1,12 @@
+.bg{
+    background-color: black;
+    overflow: scroll;
+}
+.slot{
+    display: block;
+    height: 100px;
+    background-color: white;
+    border: 1px solid black;
+}
+.board{
+}

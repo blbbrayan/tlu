@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../services/data.service";
+import {AccountService} from "../services/account.service";
+import {Race} from "../services/models/race.model";
+import {Character} from "../services/models/character.model";
+import {ObjectUtil} from "../utils/object.util";
 
 @Component({
   selector: 'app-create-character',
@@ -7,11 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCharacterComponent implements OnInit {
 
-  races: string[] = [
-      "Human",
-      "Kobald",
-      "Dryad"
-  ];
+    tempCharacter: Character = new Character();
+  races: Race[] = [];
 
   stats: {name: string, value:number}[] = [
     {name: "Strength", value: 6},
@@ -19,15 +21,31 @@ export class CreateCharacterComponent implements OnInit {
     {name: "Dexterity", value: 6}
   ];
 
-  selectedRace: string;
+  selectedRace: Race;
   statPoints: number = 6;
 
-  constructor() { }
+  constructor(private database: DataService, private accountService: AccountService) { }
 
   ngOnInit() {
     setTimeout(()=>window['$']('.dropdown-button').dropdown(), 200);
+    this.database.subscribe('races', races=>{
+        races = races || [];
+        this.races = ObjectUtil.toArray(races)
+    });
   }
 
+    submit(){
+        if(this.tempCharacter.raceId !== undefined && this.tempCharacter.name !== undefined){
+            this.database.listAdd('characters', this.tempCharacter);
+            console.log("saving", this.tempCharacter);
+            this.accountService.character = this.tempCharacter;
+            this.accountService.account.characterId = this.tempCharacter.id;
+            this.accountService.save();
+        }else{
+            console.log("not saving", this.tempCharacter);
+        }
+    }
+    
   addStat(stat){
     if(this.statPoints > 0) {
       stat.value++;
@@ -41,5 +59,10 @@ export class CreateCharacterComponent implements OnInit {
       stat.value--;
     }
   }
+    
+    selectRace(race: Race){
+            this.selectedRace = race;
+            this.tempCharacter.raceId = race.id;
+    }
 
 }
