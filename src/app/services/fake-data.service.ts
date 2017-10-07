@@ -29,18 +29,18 @@ export class FakeDataService {
     monsters: Monster[];
     selectedMonster: Monster;
     constructor(private database: DataService){
-        this.database.subscribe('skills', data=>{
-            data = data || {};
-            this.skills = ObjectUtil.toArray(data);
-
-          this.recipes = [
-            new Recipe().init(0,this.items[0],[{item: this.collectables[4], amount: 5}],this.skills[0]),
-            new Recipe().init(0,this.items[2],[{item: this.collectables[2], amount: 3}],this.skills[0]),
-            new Recipe().init(0,this.items[1],[{item: this.collectables[3], amount: 1}],this.skills[1]),
-            new Recipe().init(0,this.items[3],[{item: this.collectables[0], amount: 2},{item: this.collectables[3], amount: 3},{item: this.collectables[2], amount: 2}],this.skills[1]),
-            new Recipe().init(0,this.items[2],[{item: this.collectables[0], amount: 6},{item: this.collectables[2], amount: 6},{item: this.collectables[1], amount: 33.3}],this.skills[1]),
-          ];
-        });
+        // this.database.subscribe('skills', data=>{
+        //     data = data || {};
+        //     this.skills = ObjectUtil.toArray(data);
+        //
+        //   this.recipes = [
+        //     new Recipe().init(0,this.items[0],[{item: this.collectables[4], amount: 5}],this.skills[0]),
+        //     new Recipe().init(0,this.items[2],[{item: this.collectables[2], amount: 3}],this.skills[0]),
+        //     new Recipe().init(0,this.items[1],[{item: this.collectables[3], amount: 1}],this.skills[1]),
+        //     new Recipe().init(0,this.items[3],[{item: this.collectables[0], amount: 2},{item: this.collectables[3], amount: 3},{item: this.collectables[2], amount: 2}],this.skills[1]),
+        //     new Recipe().init(0,this.items[2],[{item: this.collectables[0], amount: 6},{item: this.collectables[2], amount: 6},{item: this.collectables[1], amount: 33.3}],this.skills[1]),
+        //   ];
+        // });
 
         this.collectables = [
             new Collectable().init("Energy","collectable"),

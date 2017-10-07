@@ -7,6 +7,7 @@ export class Weapon extends Item{
     level: number;
     stats: Stats;
     rarity: number;
+    abilityName: string;
     ability: Ability;
 
     constructor(){

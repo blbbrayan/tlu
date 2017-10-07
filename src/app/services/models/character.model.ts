@@ -2,16 +2,17 @@ import {Stats} from "./stats.model";
 import {Item} from "./item.model";
 import {Weapon} from "./item-weapon.model";
 import {Armor} from "./item-armor.model";
-import {ObjectUtil} from '../../utils/object.util';
 import {Entity} from "./entity.model";
 
 export class Character extends Entity {
 
-  id: string;
   dateCreated: string;
+  id: string;
   raceId: string;
+  inventoryIds: { itemId: string, amount: number }[];
+  equippedIds: { armor: string[], weapons: string[] };
 
-  inventory: Item[];
+  inventory: { item: Item, amount: number }[];
   equipped: { armor: Armor[], weapons: Weapon[] };
 
   level: number;
@@ -20,7 +21,6 @@ export class Character extends Entity {
   constructor(name?, red?, blue?, yellow?) {
     super();
     const d = new Date();
-    this.id = ObjectUtil.generateGuid();
     this.name = name || '';
     this.dateCreated = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
     this.level = 1;
@@ -51,7 +51,7 @@ export function characterRefresh(character) {
   character.equipped.weapons.forEach(weapon =>
     Object.keys(character.stats).forEach(stat => character.stats[stat] += weapon.stats[stat])
   );
-  character.equipped.weapons.forEach(weapon=>weapon.ability.interval = 0);
+  character.equipped.weapons.forEach(weapon => weapon.ability.interval = 0);
   character.effects = [];
   return character;
 }
