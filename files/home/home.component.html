@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="row col s4">
+      <div class="card" *ngIf="player">
+        <span class="card-title">{{player.name}} <strong>{{player.level}}</strong></span>
+        <div>Experience: {{player.experience}} / {{expNeeded()}}</div>
+        <div>Red: {{player.red}}</div>
+        <div>Blue: {{player.blue}}</div>
+        <div>Yellow: {{player.yellow}}</div>
+        <div class="center-align">
+          <a class="btn" [routerLink]="['/inventory']">Inventory</a>
+          <a class="btn" [routerLink]="['/crafting']">Craft</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-title">Social</span>
+      </div>
+    </div>
+    <div class="card col s8">
+      <span class="card-title">Quest Postings</span>
+      <div>
+        <a class="btn" (click)="battle()">battle</a>
+      </div>
+    </div>
+  </div>
+</div>

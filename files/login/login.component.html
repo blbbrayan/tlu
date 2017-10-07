@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="card window col s12 m6 push-m3 main-window">
+            <div class="card-content">
+                <span class="card-title">Login</span>
+                <div class="row">
+                    <h4 class="center-align">Username</h4>
+                    <input class="brown lighten-4 col s6 push-s3" [(ngModel)]="email">
+                </div>
+                <div class="row">
+                    <h4 class="center-align">Password</h4>
+                    <input class="brown lighten-4 col s6 push-s3" [(ngModel)]="password">
+                </div>
+                <div class="row">
+                    <a class="btn g-btn col s6 push-s3" (click)="signIn()">Login</a>
+                </div>
+                <div class="row">
+                    <a class="btn g-btn col s6 push-s3" [routerLink]="['/signup']">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,11 @@
+.hugme label{
+    margin-top: -18px;
+}
+
+.hugme label:nth-child(2){
+    margin-left: 33%;
+}
+
+.hugme label:nth-child(3){
+    margin-left: 66%;
+}

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col s4">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title" *ngFor="let turn of turns">{{turn.caster.name}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row col s8">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{enemy.name}}</span>
+          <div>Hp: {{enemy.stats.health}}</div>
+          <div>Mp: {{enemy.stats.mana}}</div>
+          <div>Damage: {{enemyReport.damage}}{{enemyReport.crit ? "!" : ""}}</div>
+          <div *ngFor="let effect of enemy.effects">{{effect.name}} ({{effect.duration}})</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{player.name}}</span>
+          <div>Hp: {{player.stats.health}}</div>
+          <div>Mp: {{player.stats.mana}}</div>
+          <div>Damage: {{playerReport.damage}}{{playerReport.crit ? "!" : ""}}</div>
+          <div class="row">
+            <div class="card col s4" [ngClass]="{'grey': weapon.ability.interval > 0}" *ngFor="let weapon of player.equipped.weapons" (click)="attack(weapon.ability)">
+              <div>{{weapon.name}}</div>
+              <div>{{weapon.ability.name}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

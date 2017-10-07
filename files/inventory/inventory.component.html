@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="card">
+        <span class="card-title"><i class="material-icons" [routerLink]="['/home']">chevron_left</i>Inventory</span>
+        <div class="row">
+            <div class="col m3">
+                <div class="item" [ngClass]="{'active': selectedItem === i}" *ngFor="let item of inventory; let i = index" (mouseover)="selectItem(inventory[i])" (click)="equip(inventory[i])">
+                    <span>{{item.name}}</span>
+                </div>
+            </div>
+            <div class="card col m9" *ngIf="selectedItem">
+                <div class="card-content">
+                    <div class="card-title">{{selectedItem.name}}<span class="right">{{rarityPipe[selectedItem.rarity-1]}}</span></div>
+                    <div class="right">
+                        <div>{{selectedItem.type}}</div>
+                        <div>{{isEquipped(selectedItem) ? "equipped" : ""}}</div>
+                    </div>
+                    <div *ngFor="let key of keys(selectedItem)">{{key}}: {{selectedItem.stats[key]}}</div>
+                </div>
+            </div>
+        </div>
+        <h3>Weapons</h3>
+        <div class="item" *ngFor="let item of weapons; let i = index" (mouseover)="selectItem(weapons[i])" (click)="unequip(item)">
+            <span>{{item.name}}</span>
+        </div> 
+        <h3>Armor</h3>
+        <div class="item" *ngFor="let item of armor; let i = index" (mouseover)="selectItem(armor[i])" (click)="unequip(item)">
+            <span>{{item.name}}</span>
+        </div>
+    </div>
+</div>

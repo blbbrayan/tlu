@@ -1,0 +1,39 @@
+<nav>
+    <div class="nav-wrapper admin-nav">
+        <div class="col s12">
+            <a [routerLink]="['/admin']" class="breadcrumb">Admin</a>
+            <a [routerLink]="['/admin/race']" class="breadcrumb">Skill</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Create Skill</span>
+                <div class="row">
+                    <h4>Name</h4>
+                    <input [(ngModel)]="tempSkill.name">
+                </div>
+                <a class="btn admin-btn" (click)="submit()">Create</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">View Skills</span>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th></th>
+                    </tr>
+                    <tr *ngFor="let item of skills">
+                        <td>{{item.name}}</td>
+                        <td>{{item.id}}</td>
+                        <td><a (click)="delete(item.id)" class="red-text">X</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
