@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Skill } from '../../services/models/skill.model';
-import {DataService} from "../../services/data.service"; 
+import {DataService} from "../../services/data.service";
 import {ObjectUtil} from "../../utils/object.util";
 
 @Component({
@@ -12,21 +12,21 @@ export class AdminSkillsComponent implements OnInit {
 
     tempSkill: Skill = new Skill();
     skills: any[];
-    
+
   constructor(private database: DataService) {
-        this.database.subscribe('skills', data=>{
+        this.database.subscribe('skills',"", data=>{
             data = data || {};
-            this.skills = ObjectUtil.toArray(data);
+            this.skills = data;
         });
   }
 
   ngOnInit() {
   }
     submit(){
-        this.database.listAdd('skills', this.tempSkill);
+        this.database.add('skills', this.tempSkill);
         this.tempSkill = new Skill();
-    } 
-    
+    }
+
     delete(id){
         this.database.delete(`skills/${id}`);
     }

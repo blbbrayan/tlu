@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Monster } from '../../services/models/monster.model';
-import {DataService} from "../../services/data.service"; 
+import {DataService} from "../../services/data.service";
 import {ObjectUtil} from "../../utils/object.util";
 
 @Component({
@@ -11,22 +11,20 @@ import {ObjectUtil} from "../../utils/object.util";
 export class AdminMonsterComponent implements OnInit {
     tempMonster: Monster = new Monster();
     mons: any[];
-    
-    constructor(private database: DataService) { 
-        this.database.subscribe('monsters', data=>{
+
+    constructor(private database: DataService) {
+        this.database.subscribe('monsters',"", data=>{
             data = data || {};
-            console.log(data);
-            this.mons = ObjectUtil.toArray(data);
-            Object.keys(data).forEach((id, index)=>this.mons[index].id = id);
+            this.mons = data;
         });
     }
 
   ngOnInit() {
   }
-    
+
     submit(){
         console.log(this.tempMonster);
-        this.database.listAdd('monsters', this.tempMonster);
+        this.database.add('monsters', this.tempMonster);
     }
     delete(id){
         this.database.delete(`monsters/${id}`);
