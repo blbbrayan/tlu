@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Account} from './models/account.model';
 import {Character} from './models/character.model';
 import {DataService} from './data.service';
+import {FakeDataService} from './fake-data.service';
 import {ObjectUtil} from '../utils/object.util';
 
 @Injectable()
@@ -10,7 +11,10 @@ export class AccountService {
     account: Account;
     character: Character;
     
-  constructor(private database: DataService) { }
+  constructor(private database: DataService, private fakedata: FakeDataService) { 
+    this.account =  fakedata.account;
+    this.character = fakedata.character;
+  }
     
     login(onloaded){
         this.database.get('characters', data=>{
@@ -24,5 +28,7 @@ export class AccountService {
         this.database.set(`accounts/${this.account.id}`, this.account);
     }
 
+    
+    
 }
  

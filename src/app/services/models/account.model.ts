@@ -10,4 +10,10 @@ export class Account{
         
     }
     
+    init(email,password,characterId){
+        this.email = email;
+        this.password = password;
+        this.characterId = characterId;
+        return this;
+    }
 }

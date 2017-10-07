@@ -21,6 +21,8 @@ export class AdminComponent implements OnInit {
         { target: '/admin/item', name: 'Item'},
         { target: '/admin/monster', name: 'Monster'},
         { target: '/admin/race', name: 'Race'},
+        { target: '/admin/recipe', name: 'Recipe'},
+        { target: '/admin/skills', name: 'Skills'},
         { target: '/admin/zone', name: 'Zone'},
 
     ]

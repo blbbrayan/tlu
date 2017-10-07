@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Monster } from '../../services/models/monster.model';
-import { Character } from '../../services/models/character.model';
-import { Combat } from '../../services/models/combat.model';
+import {Component, OnInit} from '@angular/core';
+import {Monster, monsterRefresh} from '../../services/models/monster.model';
+import {Character, characterRefresh} from '../../services/models/character.model';
+import {AbilityUtil} from "../../utils/ability.util";
+import {AccountService} from "../../services/account.service";
+import {Ability} from "../../services/models/ability.model";
+import {CombatUtil} from "../../utils/combat.util";
+import {FakeDataService} from "../../services/fake-data.service";
+import {Entity} from "../../services/models/entity.model";
+import {Router} from "@angular/router";
+import {Turn} from "../../services/models/turn.model";
+import {Room} from "../../services/models/room.model";
 
 @Component({
   selector: 'app-play-single-battle',
@@ -10,34 +18,49 @@ import { Combat } from '../../services/models/combat.model';
 })
 export class PlaySingleBattleComponent implements OnInit {
 
-player: Character;
-enemy: Monster;
+  player: Character;
+  room: Room;
 
-constructor() { }
+  playerReport: { crit: boolean, dodge: boolean, damage: number } = {crit: false, dodge: false, damage: 0};
+  enemyReport: { crit: boolean, dodge: boolean, damage: number } = {crit: false, dodge: false, damage: 0};
 
-  ngOnInit() { 
-    this.player = new Character();
-    this.enemy = new Monster();
-    this.setStats(this.player, "Dave", 8, 6, 6);
-    this.setStats(this.enemy, "Spider", 3, 2, 6);
-    this.player.combat = new Combat(this.player.red, this.player.blue, this.player.yellow);
-    this.enemy.combat = new Combat(this.enemy.red, this.enemy.blue, this.enemy.yellow);
+  constructor(private account: AccountService, private data: FakeDataService, private router: Router) {}
+
+  ngOnInit() {
+    this.player = this.account.character;
+    characterRefresh(this.player);
+    this.enemy = this.data.selectedMonster;
+    monsterRefresh(this.enemy);
   }
-    
-get(obj){
-    return JSON.stringify(obj);
-}
-    
-setStats(e, name, red, blue, yellow){
-    e.name=name;
-    e.red=red;
-    e.blue=blue;
-    e.yellow=yellow;
-}
-    
-attack(attacker, target){
-    
-}
+
+  canAttack(): boolean {
+    return this.player.equipped.weapons.find(weapon => weapon.ability.interval === 0) !== undefined;
+  }
+
+  isDead(entity: Entity){
+    if(entity.stats.health <= 0)
+      this.router.navigate(['/home']);
+  }
+
+  attack(ability: Ability) {
+    this.turns = [];
+    setTimeout(() => {
+      CombatUtil.startTurn(this.player);
+      if (this.canAttack())
+        this.turns.push(new Turn(this.player,this.enemy,(player, enemy)=>CombatUtil.attack(ability, player, enemy), true));
+      this.turns.push(new Turn(this.enemy,this.player,(enemy, player)=>AbilityUtil.attack("agility", 0, enemy.stats, player.stats), false));
+     this.turns.sort((a:Turn, b:Turn)=>{
+       if(a.speed > b.speed)
+         return 1;
+       if(a.speed < b.speed)
+         return -1;
+       return 0;
+     });
+     this.turns.forEach((turn, i)=> setTimeout(()=>turn.isPlayer ? this.playerReport = turn.start() : this.enemyReport = turn.start(), i*300));
+     this.isDead(this.player);
+     this.isDead(this.enemy);
+    }, 200);
+  }
 
 
 }

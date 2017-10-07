@@ -61,7 +61,7 @@ export class CreateCharacterComponent implements OnInit {
   }
     
     selectRace(race: Race){
-            this.selectedRace = race;
+            this.selectedRace = race; 
             this.tempCharacter.raceId = race.id;
     }
 

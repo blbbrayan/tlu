@@ -1,30 +1,57 @@
-import {Race} from "./race.model";
-import {Combat} from "./combat.model";
+import {Stats} from "./stats.model";
+import {Item} from "./item.model";
+import {Weapon} from "./item-weapon.model";
+import {Armor} from "./item-armor.model";
 import {ObjectUtil} from '../../utils/object.util';
-export class Character{ 
-    
-    id: string;    
-    dateCreated: string;
-    raceId: string;
+import {Entity} from "./entity.model";
 
-    name: string;
-    level: number;
-    experience: number;
-    red: number; // health, strength
-    blue: number; // mana, intelligence
-    yellow: number; // agility, crit-chance
-    
-    combat: Combat;
-    
-    constructor(name?, red?, blue?, yellow?){
-        const d = new Date();
-        this.id = ObjectUtil.generateGuid();
-        this.name = name || '';
-        this.dateCreated = (d.getMonth()+1)+"/"+d.getDate()+"/"+d.getFullYear();
-        this.level = 1;
-        this.experience = 0;
-        this.red = red || 0;
-        this.blue = blue || 0;
-        this.yellow = yellow || 0; 
-    }
-} 
+export class Character extends Entity {
+
+  id: string;
+  dateCreated: string;
+  raceId: string;
+
+  inventory: Item[];
+  equipped: { armor: Armor[], weapons: Weapon[] };
+
+  level: number;
+  experience: number;
+
+  constructor(name?, red?, blue?, yellow?) {
+    super();
+    const d = new Date();
+    this.id = ObjectUtil.generateGuid();
+    this.name = name || '';
+    this.dateCreated = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+    this.level = 1;
+    this.experience = 0;
+    this.red = red || 0;
+    this.blue = blue || 0;
+    this.yellow = yellow || 0;
+  }
+
+  init(name, level, experience, red, blue, yellow, inventory) {
+    this.name = name;
+    this.level = level;
+    this.experience = experience;
+    this.red = red;
+    this.blue = blue;
+    this.yellow = yellow;
+    this.stats = new Stats(red, blue, yellow);
+    this.inventory = inventory;
+    this.equipped = {armor: [], weapons: []};
+    return this;
+  }
+
+}
+
+export function characterRefresh(character) {
+  console.log('character', character);
+  character.stats = new Stats(character.red, character.blue, character.yellow, character.level);
+  character.equipped.weapons.forEach(weapon =>
+    Object.keys(character.stats).forEach(stat => character.stats[stat] += weapon.stats[stat])
+  );
+  character.equipped.weapons.forEach(weapon=>weapon.ability.interval = 0);
+  character.effects = [];
+  return character;
+}

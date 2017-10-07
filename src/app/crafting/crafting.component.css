@@ -1,25 +1,16 @@
-.card {
-    padding: 15px;
-}
-
-.item {
+h6{
     padding: 5px 0 5px 8px;
-    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid rgba(0,0,0,0.2);
     transition: background-color .1s, padding .3s;
 }
 
-.item span {
-    padding-left: 15px;
-    transition: .3s;
-}
-
-.item:hover {
+h6.selectable:hover{
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgba(0,0,0,0.03);
     padding: 5px 0 5px 14px;
 }
 
-.item.active {
+h6.active{
     border-color: lightgreen;
     background-color: rgba(144, 238, 144, 0.05);
     padding: 5px 0 5px 14px;
@@ -29,4 +20,8 @@
 i {
     vertical-align: middle;
     cursor: pointer;
+}
+
+.card, .card-content{
+  transition: .3s;
 }
