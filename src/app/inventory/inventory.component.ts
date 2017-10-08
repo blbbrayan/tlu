@@ -27,7 +27,7 @@ export class InventoryComponent implements OnInit {
     let inventory = this.accountService.character.inventory;
     if(inventory === undefined){
       let ids = this.accountService.character.inventoryIds;
-      ids.forEach(id=>this.dataService.get('item/'))
+      // ids.forEach(id=>this.dataService.get('item/'))
     }
   }
 

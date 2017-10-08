@@ -15,7 +15,7 @@ export class ItemArmorComponent implements OnInit {
 
   constructor(private database: DataService) {
     setTimeout(() => window['$']('.dropdown-button').dropdown(), 200);
-    this.database.subscribe('items/armors',"", data=>  this.armors = data || []);
+    this.database.subscribe('armors',"", data=>  this.armors = data || []);
   }
 
   ngOnInit() {
@@ -26,8 +26,8 @@ export class ItemArmorComponent implements OnInit {
   }
 
   submit(){
-    console.log("Armor", this.item);
-    this.database.add('items/armors', this.item);
+    let key = this.database.add('armors', this.item);
+    this.database.add('items', {db: 'armors', id: key});
     this.item = new Armor();
   }
 

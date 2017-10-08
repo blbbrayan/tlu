@@ -22,7 +22,7 @@ export class ItemWeaponComponent implements OnInit {
 
   constructor(private database: DataService, private abilityservice: AbilityService) {
     setTimeout(() => window['$']('.dropdown-button').dropdown(), 200);
-    this.database.subscribe('items/weapons',"", data=>  this.weapons = data || []);
+    this.database.subscribe('weapons',"", data=>  this.weapons = data || []);
     this.abilities = abilityservice.getAll();
   }
 
@@ -37,12 +37,13 @@ export class ItemWeaponComponent implements OnInit {
     this.item.rarity = this.rarity;
     this.item.abilityName = this.selectedAbility;
     this.item.level = this.level;
-    this.database.add('items/weapons', this.item);
+    let key = this.database.add('weapons', this.item);
+    this.database.add('items', {db: 'weapons', id: key});
     this.item = new Weapon();
   }
 
   delete(id){
-    this.database.delete(`items/weapons/${id}`);
+    this.database.delete(`weapons/${id}`);
   }
 
   selectRarity(rarity: string, index){

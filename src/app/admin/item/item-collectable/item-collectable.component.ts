@@ -14,14 +14,15 @@ export class AdminCollectableComponent {
   collectables: any[];
 
   constructor(private database: DataService) {
-    this.database.subscribe('items/collectables', "", data => {
+    this.database.subscribe('collectables', "", data => {
       data = data || [];
       this.collectables = data;
     });
   }
 
   submit() {
-    this.database.add('items/collectables', this.item);
+    let key = this.database.add('collectables', this.item);
+    this.database.add('items', {db: 'collectables', id: key});
     this.item = new Collectable();
   }
 

@@ -16,7 +16,7 @@ import {AdminComponent} from './admin/admin.component';
 import {LoginComponent} from './login/login.component';
 import {CreateCharacterComponent} from './create-character/create-character.component';
 // import { PlaySingleBattleComponent } from './play/play-single-battle/play-single-battle.component';
-// import { InventoryComponent } from './inventory/inventory.component';
+import { InventoryComponent } from './inventory/inventory.component';
 import {AdminCharacterComponent} from './admin/admin-character/admin-character.component';
 import {AdminItemComponent} from './admin/item/item.component';
 import {AdminMonsterComponent} from './admin/admin-monster/admin-monster.component';
@@ -36,7 +36,7 @@ const ROUTES = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
   {path: 'home', component: HomeComponent},
-  // {path: 'inventory', component: InventoryComponent},
+  {path: 'inventory', component: InventoryComponent},
   //     {path: 'crafting', component: CraftingComponent},
   {path: 'create-character', component: CreateCharacterComponent},
   {path: 'play/garden', component: PlayGardenComponent},
@@ -63,7 +63,7 @@ const ROUTES = [
     AdminComponent,
     PlayGardenComponent,
     // PlaySingleBattleComponent,
-    // InventoryComponent,
+    InventoryComponent,
     AdminCharacterComponent,
     AdminItemComponent,
     AdminMonsterComponent,
