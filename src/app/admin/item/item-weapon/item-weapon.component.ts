@@ -12,19 +12,16 @@ import {Ability} from "../../../services/models/ability.model";
 })
 export class ItemWeaponComponent implements OnInit {
   item: Weapon = new Weapon();
-  red: number;
-  yellow: number;
-  blue: number;
   weapons: any[];
   rarity: number;
-  ability: Ability;
   level: number;
   selectedRarity: string;
   selectedAbility: string;
   abilities: any[];
-  rarities: any[] =  ["Common", "UnCommon", "Rare", "Legendary", "Mythic"];
+  rarities: any[] =  ["Common", "Uncommon", "Rare", "Legendary", "Mythic"];
 
   constructor(private database: DataService, private abilityservice: AbilityService) {
+    setTimeout(() => window['$']('.dropdown-button').dropdown(), 200);
     this.database.subscribe('items/weapons',"", data=>  this.weapons = data || []);
     this.abilities = abilityservice.getAll();
   }
@@ -32,12 +29,14 @@ export class ItemWeaponComponent implements OnInit {
   ngOnInit() {
   }
 
+  getStats(){
+    return Object.keys(this.item.stats);
+  }
+
   submit(){
-    this.item.stats = new Stats(this.red || 0,this.blue || 0,this.yellow || 0);
-    this.item.rarity = this.rarity || 0;
-    this.item.ability = this.ability;
-    this.item.level = this.level || 0;
-    console.log("Armor", this.item);
+    this.item.rarity = this.rarity;
+    this.item.abilityName = this.selectedAbility;
+    this.item.level = this.level;
     this.database.add('items/weapons', this.item);
     this.item = new Weapon();
   }
@@ -46,13 +45,11 @@ export class ItemWeaponComponent implements OnInit {
     this.database.delete(`items/weapons/${id}`);
   }
 
-
   selectRarity(rarity: string, index){
     this.selectedRarity = rarity;
     this.rarity = index;
   }
-  selectAbility(ability: Ability, index){
+  selectAbility(ability: Ability){
     this.selectedAbility = ability.name;
-    this.ability = ability;
   }
 }

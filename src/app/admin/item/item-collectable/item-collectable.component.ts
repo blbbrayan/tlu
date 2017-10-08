@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Collectable } from '../../../services/models/item-collectable.model';
+import {Component, OnInit} from '@angular/core';
+import {Collectable} from '../../../services/models/item-collectable.model';
 import {DataService} from "../../../services/data.service";
 import {ObjectUtil} from "../../../utils/object.util";
 
@@ -8,25 +8,24 @@ import {ObjectUtil} from "../../../utils/object.util";
   templateUrl: './item-collectable.component.html',
   styleUrls: ['./item-collectable.component.css', '../../admin.component.css']
 })
-export class AdminCollectableComponent implements OnInit {
+export class AdminCollectableComponent {
 
-    item: Collectable = new Collectable();
-    collectables: any[];
+  item: Collectable = new Collectable();
+  collectables: any[];
 
   constructor(private database: DataService) {
-      this.database.subscribe('items/collectables',"", data=>{
-            data = data || {};
-            this.collectables = data;
-        }); }
-
-  ngOnInit() {
+    this.database.subscribe('items/collectables', "", data => {
+      data = data || [];
+      this.collectables = data;
+    });
   }
-    submit(){
-        this.database.add('items/collectables', this.item);
-        this.item = new Collectable();
-    }
 
-    delete(id){
-        this.database.delete(`items/collectables/${id}`);
-    }
+  submit() {
+    this.database.add('items/collectables', this.item);
+    this.item = new Collectable();
+  }
+
+  delete(id) {
+    this.database.delete(`items/collectables/${id}`);
+  }
 }

@@ -1,39 +1,40 @@
 <nav>
-    <div class="nav-wrapper admin-nav">
-      <div class="col s12">
-        <a [routerLink]="['/admin']" class="breadcrumb">Admin</a>
-        <a [routerLink]="['/admin/char']" class="breadcrumb">Character</a>
+  <div class="nav-wrapper admin-nav">
+    <div class="col s12">
+      <a [routerLink]="['/admin']" class="breadcrumb">Admin</a>
+      <a [routerLink]="['/admin/char']" class="breadcrumb">Character</a>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">View Characters</span>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Date Created</th>
+            <th>Race</th>
+            <th>Red</th>
+            <th>Blue</th>
+            <th>Yellow</th>
+            <th>ID</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let item of chars; let i of index" [ngClass]="{'selected': selectedCharacter === i}"
+              (click)="selectedCharacter = i">
+            <td>{{item.name}}</td>
+            <td>{{item.dateCreated}}</td>
+            <td>{{item.raceId}}</td>
+            <td>{{item.red}}</td>
+            <td>{{item.yellow}}</td>
+            <td>{{item.blue}}</td>
+            <td>{{item.id}}</td>
+            <td><a (click)="delete(item.id)" class="red-text">X</a></td>
+          </tr>
+        </table>
       </div>
     </div>
-  </nav>
-<div class="container">
-    <div class="row">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">View Characters</span>
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Date Created</th>
-                        <th>Race</th>
-                        <th>Red</th>
-                        <th>Blue</th>
-                        <th>Yellow</th>
-                        <th>ID</th>
-                        <th></th>
-                    </tr>
-                    <tr *ngFor="let item of chars">
-                        <td>{{item.name}}</td>
-                        <td>{{item.dateCreated}}</td>
-                        <td>{{item.raceId}}</td>
-                        <td>{{item.red}}</td>
-                        <td>{{item.yellow}}</td>
-                        <td>{{item.blue}}</td>
-                        <td>{{item.id}}</td>
-                        <td><a (click)="delete(item.id)" class="red-text">X</a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

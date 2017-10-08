@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from "../../../services/data.service";
 import {Armor} from "../../../services/models/item-armor.model";
-import {Stats} from "../../../services/models/stats.model";
 
 @Component({
   selector: 'app-item-armor',
@@ -11,24 +10,22 @@ import {Stats} from "../../../services/models/stats.model";
 export class ItemArmorComponent implements OnInit {
 
   item: Armor = new Armor();
-  red: number;
-  yellow: number;
-  blue: number;
   armors: any[];
-  rarity: number;
-  selectedRarity: string;
-  rarities: any[] =  ["Common", "UnCommon", "Rare", "Legendary", "Mythic"];
+  rarities: any[] =  ["Common", "Uncommon", "Rare", "Legendary", "Mythic"];
 
   constructor(private database: DataService) {
+    setTimeout(() => window['$']('.dropdown-button').dropdown(), 200);
     this.database.subscribe('items/armors',"", data=>  this.armors = data || []);
   }
 
   ngOnInit() {
   }
 
+  getStats(){
+    return Object.keys(this.item.stats);
+  }
+
   submit(){
-    this.item.stats = new Stats(this.red,this.blue,this.yellow);
-    this.item.rarity = this.rarity || 0;
     console.log("Armor", this.item);
     this.database.add('items/armors', this.item);
     this.item = new Armor();
@@ -39,8 +36,7 @@ export class ItemArmorComponent implements OnInit {
   }
 
 
-  selectRarity(rarity: string, index){
-    this.selectedRarity = rarity;
-    this.rarity = index;
+  selectRarity(index){
+    this.item.rarity = index
   }
 }

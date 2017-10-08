@@ -18,19 +18,20 @@
         </div>
         <div class="row">
           <h4>Rarity</h4>
-          <a class="dropdown-button btn col s6 push-s3 admin-btn" data-activates='rarity-dd'>{{selectedRarity || "Rarity"}}</a>
+          <a class="dropdown-button btn col s6 push-s3 admin-btn" data-activates='rarity-dd'>{{rarities[item.rarity] || "Rarity"}}</a>
           <ul id='rarity-dd' class='dropdown-content'>
-            <li *ngFor="let rarity of rarities; let i = index"><a class="black-text" (click)="selectRarity(rarity, i)">{{rarity}}</a></li>
+            <li *ngFor="let rarity of rarities; let i = index"><a class="black-text" (click)="selectRarity(i)">{{rarity}}</a></li>
           </ul>
         </div>
         <div class="row">
-          <input class="col s4" type="number" placeholder="red" [(ngModel)]="red">
-          <input class="col s4" type="number" placeholder="blue" [(ngModel)]="blue">
-          <input class="col s4" type="number" placeholder="yellow" [(ngModel)]="yellow">
-          <div class="row hugme">
-            <label class="col s4">red</label>
-            <label class="col s4">blue</label>
-            <label class="col s4">yellow</label>
+          <h4>Level</h4>
+          <input class="col s8" type="number" placeholder="level" [(ngModel)]="item.level">
+        </div>
+        <div class="row">
+          <h4>Stats</h4>
+          <div *ngFor="let stat of getStats()">
+            <label class="col s3">{{stat}}</label>
+            <input class="col s7" type="number" placeholder="stat" [(ngModel)]="item.stats[stat]">
           </div>
         </div>
         <a class="btn admin-btn" (click)="submit()">Create</a>
@@ -46,11 +47,11 @@
             <th>ID</th>
             <th></th>
           </tr>
-          <tr *ngFor="let item of armors">
-            <td>{{item.name}}</td>
-            <td>{{item.rarity}}</td>
-            <td>{{item.id}}</td>
-            <td><a (click)="delete(item.id)" class="red-text">X</a></td>
+          <tr *ngFor="let armor of armors">
+            <td>{{armor.name}}</td>
+            <td>{{rarities[armor.rarity]}}</td>
+            <td>{{armor.id}}</td>
+            <td><a (click)="delete(armor.id)" class="red-text">X</a></td>
           </tr>
         </table>
       </div>

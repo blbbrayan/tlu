@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
 
     links: {target: string, name: string }[];
-    
-  constructor(private router: Router) { 
-    
+
+  constructor(private router: Router) {
+
   }
-  ngOnInit() { 
+  ngOnInit() {
     this.links = [
         { target: '/admin/char', name: 'Character'},
         { target: '/admin/item', name: 'Item'},
