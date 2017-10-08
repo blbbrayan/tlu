@@ -32,7 +32,7 @@ export class PlayGardenComponent implements OnInit {
   }
 
   newRace(){
-    let race = new Race('hooman', '', 2, 2, 2);
+    let race = new Race().init('hooman', '', 2, 2, 2);
     this.database.add('races', race);
   }
 

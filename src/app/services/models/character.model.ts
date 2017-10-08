@@ -25,9 +25,9 @@ export class Character extends Entity {
     this.dateCreated = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
     this.level = 1;
     this.experience = 0;
-    this.red = red || 0;
-    this.blue = blue || 0;
-    this.yellow = yellow || 0;
+    this.red = red || 6;
+    this.blue = blue || 6;
+    this.yellow = yellow || 6;
   }
 
   init(name, level, experience, red, blue, yellow, inventory) {

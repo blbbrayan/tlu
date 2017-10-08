@@ -12,10 +12,12 @@ export class DataService {
     return this.firebase.database();
   }
 
-  get(path: string, onloaded) {
-    this.database(path).once('value').then(function (snapshot) {
-      onloaded(snapshot.val());
-    });
+  set(path: string, key: string, obj: any) {
+    console.log('setting');
+    this.database(path + this.key(key)).set(obj);
+    this.get(path, key, e=>console.log('set', e));
+    obj.id = key;
+    return obj;
   }
 
   private key(str: string) {
@@ -23,8 +25,18 @@ export class DataService {
   }
 
   private list(ar: any) {
-    Object.keys(ar).forEach(key => ar[key].id = key);
-    return ObjectUtil.toArray(ar);
+    if(ar) {
+      Object.keys(ar).forEach(key => ar[key].id = key);
+      return ObjectUtil.toArray(ar);
+    }
+    return undefined;
+  }
+
+  get(path: string, key: string, onLoad) {
+    this.database(path + this.key(key)).once('value').then(snapshot =>{
+      let data = snapshot.val();
+      onLoad(key ? Object.assign({id: key}, data) : this.list(data))
+    });
   }
 
   subscribe(path: string, key: string, onChange: any) {

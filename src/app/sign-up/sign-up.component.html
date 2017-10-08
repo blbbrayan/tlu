@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Sign Up</span>
+                <div class="row">
+                    <h4>Email</h4>
+                    <input [(ngModel)]="email">
+                </div>
+                <div class="row">
+                    <h4>Password</h4>
+                    <input type="password" [(ngModel)]="password">
+                </div>
+                <div class="row">
+                    <h4>Confirm Password</h4>
+                    <input type="password" [(ngModel)]="confirmPassword">
+                </div>
+                <a class="btn" (click)="submit()">Create</a>
+                <span *ngIf="error">{{error}}</span>
+            </div>
+        </div>
+    </div>

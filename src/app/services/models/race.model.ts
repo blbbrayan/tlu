@@ -14,13 +14,13 @@ export class Race {
     this.yellow = 0;
   }
 
-  init(id: string, name: string, desc: string, red: number, blue: number, yellow: number) {
-    this.id = id;
+  init(name: string, desc: string, red: number, blue: number, yellow: number) {
     this.name = name;
     this.desc = desc;
     this.red = red;
     this.blue = blue;
     this.yellow = yellow;
+    return this;
   }
 
 }
