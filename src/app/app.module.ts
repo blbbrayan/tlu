@@ -10,21 +10,21 @@ import {DataService} from "./services/data.service";
 import {AccountService} from "./services/account.service";
 
 import {PlayGardenComponent} from './play/play-garden/play-garden.component';
-import { HomeComponent } from './home/home.component';
-// import { AdminComponent } from './admin/admin.component';
-import { LoginComponent } from './login/login.component';
-import { CreateCharacterComponent } from './create-character/create-character.component';
+import {HomeComponent} from './home/home.component';
+import {AdminComponent} from './admin/admin.component';
+import {LoginComponent} from './login/login.component';
+import {CreateCharacterComponent} from './create-character/create-character.component';
 // import { PlaySingleBattleComponent } from './play/play-single-battle/play-single-battle.component';
 // import { InventoryComponent } from './inventory/inventory.component';
-// import { AdminCharacterComponent } from './admin/admin-character/admin-character.component';
-// import { AdminItemComponent } from './admin/item/item.component';
-// import { AdminMonsterComponent } from './admin/admin-monster/admin-monster.component';
+import {AdminCharacterComponent} from './admin/admin-character/admin-character.component';
+import {AdminItemComponent} from './admin/item/item.component';
+import {AdminMonsterComponent} from './admin/admin-monster/admin-monster.component';
 import {AdminRaceComponent} from './admin/admin-race/admin-race.component';
-// import { AdminCollectableComponent } from './admin/item/item-collectable/item-collectable.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import {AdminCollectableComponent} from './admin/item/item-collectable/item-collectable.component';
+import {SignUpComponent} from './sign-up/sign-up.component';
 // import { CraftingComponent } from './crafting/crafting.component';
-// import { AdminSkillsComponent } from './admin/admin-skills/admin-skills.component';
-// import { AdminRecipeComponent } from './admin/admin-recipe/admin-recipe.component';
+import {AdminSkillsComponent} from './admin/admin-skills/admin-skills.component';
+import {AdminRecipeComponent} from './admin/admin-recipe/admin-recipe.component';
 // import { SingleBattleReportComponent } from './play/single-battle-report/single-battle-report.component';
 
 const ROUTES = [
@@ -37,14 +37,14 @@ const ROUTES = [
   {path: 'create-character', component: CreateCharacterComponent},
   {path: 'play/garden', component: PlayGardenComponent},
   //   {path: 'play/battle', component: PlaySingleBattleComponent},
-  // {path: 'admin', component: AdminComponent},
-  //   {path: 'admin/char', component: AdminCharacterComponent},
-  //   {path: 'admin/item', component: AdminItemComponent},
-  //   {path: 'admin/monster', component: AdminMonsterComponent},
+  {path: 'admin', component: AdminComponent},
+  {path: 'admin/char', component: AdminCharacterComponent},
+  {path: 'admin/item', component: AdminItemComponent},
+  {path: 'admin/monster', component: AdminMonsterComponent},
   {path: 'admin/race', component: AdminRaceComponent},
-  //   {path: 'admin/recipe', component: AdminRecipeComponent},
-  //       {path: 'admin/skills', component: AdminSkillsComponent},
-  //   {path: 'admin/item/collectable', component: AdminCollectableComponent},
+  {path: 'admin/recipe', component: AdminRecipeComponent},
+  {path: 'admin/skills', component: AdminSkillsComponent},
+  {path: 'admin/item/collectable', component: AdminCollectableComponent},
   {path: '**', redirectTo: '/login'}
 ];
 
@@ -54,19 +54,19 @@ const ROUTES = [
     LoginComponent,
     CreateCharacterComponent,
     HomeComponent,
-    // AdminComponent,
+    AdminComponent,
     PlayGardenComponent,
     // PlaySingleBattleComponent,
     // InventoryComponent,
-    // AdminCharacterComponent,
-    // AdminItemComponent,
-    // AdminMonsterComponent,
+    AdminCharacterComponent,
+    AdminItemComponent,
+    AdminMonsterComponent,
     AdminRaceComponent,
-    // AdminCollectableComponent,
+    AdminCollectableComponent,
     SignUpComponent,
     // CraftingComponent,
-    // AdminSkillsComponent,
-    // AdminRecipeComponent,
+    AdminSkillsComponent,
+    AdminRecipeComponent,
     // SingleBattleReportComponent
   ],
   imports: [
@@ -75,12 +75,15 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [DataService, AccountService, Location, {
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [AppComponent]
+  providers:
+    [DataService, AccountService, Location, {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }],
+  bootstrap:
+    [AppComponent]
 })
+
 export class AppModule {
   constructor() {
     window["firebase"].initializeApp({

@@ -11,30 +11,29 @@ import {DataService} from '../../services/data.service';
 })
 
 export class AdminRecipeComponent implements OnInit {
-    
+
     tempRecipe: Recipe;
     recipes: any[];
     selectedItem: Collectable;
     collectables : Collectable[] = [];
     items: any[];
     categories: {name: string, items: any[]}[] = [];
-    
-    constructor(private database: DataService) { 
+
+    constructor(private database: DataService) {
         this.tempRecipe = new Recipe();
-        this.database.subscribe('items', items=>{
+        this.database.subscribe('items',"", items=>{
             items = items || [];
             let i = [];
-            ObjectUtil.toArray(items).forEach((ar, index) =>{ 
+            items.forEach((ar, index) =>{
                 i = i.concat(ObjectUtil.toArray(ar));
                 const name = Object.keys(items)[index];
-                this.categories.push({name: name, items: ObjectUtil.toArray(items[name])});
+                this.categories.push({name: name, items: items[name]});
             });
             this.items = i;
-            console.log(this.categories);
         });
-        this.database.subscribe('collectables', collectables=>{
+        this.database.subscribe('collectables',"", collectables=>{
             collectables = collectables || [];
-            this.collectables = ObjectUtil.toArray(collectables)
+            this.collectables = collectables;
         });
     }
 
@@ -44,10 +43,10 @@ export class AdminRecipeComponent implements OnInit {
         this.selectedItem = collectable;
         this.tempRecipe.itemId = collectable.id;
     }
-    
+
     submit(){
         if(this.tempRecipe.itemId !== undefined && this.tempRecipe.itemsNeeded !== undefined && this.tempRecipe.level !== undefined){
-            this.database.listAdd('items/collectables', this.tempRecipe);
+            this.database.add('items/collectables', this.tempRecipe);
             console.log("saving", this.tempRecipe);
         }else{
             console.log("not saving", this.tempRecipe);

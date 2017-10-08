@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Collectable } from '../../../services/models/item-collectable.model';
-import {DataService} from "../../../services/data.service"; 
+import {DataService} from "../../../services/data.service";
 import {ObjectUtil} from "../../../utils/object.util";
 
 @Component({
@@ -12,20 +12,20 @@ export class AdminCollectableComponent implements OnInit {
 
     item: Collectable = new Collectable();
     collectables: any[];
-    
-  constructor(private database: DataService) {        
-      this.database.subscribe('items/collectables', data=>{
+
+  constructor(private database: DataService) {
+      this.database.subscribe('items/collectables',"", data=>{
             data = data || {};
-            this.collectables = ObjectUtil.toArray(data);
+            this.collectables = data;
         }); }
 
   ngOnInit() {
   }
     submit(){
-        this.database.listAdd('items/collectables', this.item);
+        this.database.add('items/collectables', this.item);
         this.item = new Collectable();
-    } 
-    
+    }
+
     delete(id){
         this.database.delete(`items/collectables/${id}`);
     }
