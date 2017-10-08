@@ -9,11 +9,11 @@ export class InfernoAbility extends Ability{
   burnDur: number;
   burnBonus: number;
 
-  constructor(cooldown: number, bonus?: number, burnDur?: number, burnBonus?: number) {
-    super("Inferno", "You whip an inferno at your opponent.", cooldown);
-    this.bonus = bonus || 1;
-    this.burnDur = burnDur || 1;
-    this.burnBonus = burnBonus || 1;
+  constructor() {
+    super("Inferno", "You whip an inferno at your opponent.", 5);
+    this.bonus = 16;
+    this.burnDur = 3;
+    this.burnBonus = 5;
   }
 
   onCast(caster: Entity, enemy: Entity) {

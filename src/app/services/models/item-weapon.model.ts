@@ -8,6 +8,7 @@ export class Weapon extends Item{
     stats: Stats;
     rarity: number;
     abilityName: string;
+
     ability: Ability;
 
     constructor(){

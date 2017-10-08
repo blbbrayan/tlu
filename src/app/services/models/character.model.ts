@@ -10,7 +10,7 @@ export class Character extends Entity {
   id: string;
   raceId: string;
   inventoryIds: { itemId: string, amount: number }[];
-  equippedIds: { armor: string[], weapons: string[] };
+  equippedIds: { armor: string[], weapons: string[] }[];
 
   inventory: { item: Item, amount: number }[];
   equipped: { armor: Armor[], weapons: Weapon[] };
@@ -28,19 +28,8 @@ export class Character extends Entity {
     this.red = red || 6;
     this.blue = blue || 6;
     this.yellow = yellow || 6;
-  }
-
-  init(name, level, experience, red, blue, yellow, inventory) {
-    this.name = name;
-    this.level = level;
-    this.experience = experience;
-    this.red = red;
-    this.blue = blue;
-    this.yellow = yellow;
-    this.stats = new Stats(red, blue, yellow);
-    this.inventory = inventory;
-    this.equipped = {armor: [], weapons: []};
-    return this;
+    this.inventoryIds = [];
+    this.equippedIds = [];
   }
 
 }
