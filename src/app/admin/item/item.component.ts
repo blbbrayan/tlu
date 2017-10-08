@@ -11,16 +11,16 @@ export class AdminItemComponent implements OnInit {
 
 
     links: {target: string, name: string }[];
-    
-  constructor(private router: Router) { 
-    
+
+  constructor(private router: Router) {
+
   }
-    
-  ngOnInit() { 
+
+  ngOnInit() {
     this.links = [
         { target: '/admin/item/collectable', name: 'Collectable'},
         { target: '/admin/item/armor', name: 'Armor'},
-        { target: '/admin/item/weapons', name: 'Weapons'},
+        { target: '/admin/item/weapon', name: 'Weapons'},
         { target: '/admin/item/crafting', name: 'Crafting'},
         { target: '/admin/item/potions', name: 'Potions'},
 

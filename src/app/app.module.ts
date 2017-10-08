@@ -8,6 +8,7 @@ import {RouterModule} from "@angular/router";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {DataService} from "./services/data.service";
 import {AccountService} from "./services/account.service";
+import {AbilityService} from "./services/abilities.service";
 
 import {PlayGardenComponent} from './play/play-garden/play-garden.component';
 import {HomeComponent} from './home/home.component';
@@ -25,6 +26,9 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 // import { CraftingComponent } from './crafting/crafting.component';
 import {AdminSkillsComponent} from './admin/admin-skills/admin-skills.component';
 import {AdminRecipeComponent} from './admin/admin-recipe/admin-recipe.component';
+import { ItemArmorComponent } from './admin/item/item-armor/item-armor.component';
+import { ItemWeaponComponent } from './admin/item/item-weapon/item-weapon.component';
+import {Ability} from "./services/models/ability.model";
 // import { SingleBattleReportComponent } from './play/single-battle-report/single-battle-report.component';
 
 const ROUTES = [
@@ -45,6 +49,8 @@ const ROUTES = [
   {path: 'admin/recipe', component: AdminRecipeComponent},
   {path: 'admin/skills', component: AdminSkillsComponent},
   {path: 'admin/item/collectable', component: AdminCollectableComponent},
+  {path: 'admin/item/armor', component: ItemArmorComponent},
+  {path: 'admin/item/weapon', component: ItemWeaponComponent},
   {path: '**', redirectTo: '/login'}
 ];
 
@@ -67,6 +73,8 @@ const ROUTES = [
     // CraftingComponent,
     AdminSkillsComponent,
     AdminRecipeComponent,
+    ItemArmorComponent,
+    ItemWeaponComponent,
     // SingleBattleReportComponent
   ],
   imports: [
@@ -76,7 +84,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES)
   ],
   providers:
-    [DataService, AccountService, Location, {
+    [DataService, AccountService,AbilityService, Location, {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     }],

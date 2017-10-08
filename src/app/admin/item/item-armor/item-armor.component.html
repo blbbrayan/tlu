@@ -1,0 +1,59 @@
+<nav>
+  <div class="nav-wrapper admin-nav">
+    <div class="col s12">
+      <a [routerLink]="['/admin']" class="breadcrumb">Admin</a>
+      <a [routerLink]="['/admin/item']" class="breadcrumb">Item</a>
+      <a [routerLink]="['/admin/item/armor']" class="breadcrumb">Armor</a>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Create Armor</span>
+        <div class="row">
+          <h4>Name</h4>
+          <input [(ngModel)]="item.name">
+        </div>
+        <div class="row">
+          <h4>Rarity</h4>
+          <a class="dropdown-button btn col s6 push-s3 admin-btn" data-activates='rarity-dd'>{{selectedRarity || "Rarity"}}</a>
+          <ul id='rarity-dd' class='dropdown-content'>
+            <li *ngFor="let rarity of rarities; let i = index"><a class="black-text" (click)="selectRarity(rarity, i)">{{rarity}}</a></li>
+          </ul>
+        </div>
+        <div class="row">
+          <input class="col s4" type="number" placeholder="red" [(ngModel)]="red">
+          <input class="col s4" type="number" placeholder="blue" [(ngModel)]="blue">
+          <input class="col s4" type="number" placeholder="yellow" [(ngModel)]="yellow">
+          <div class="row hugme">
+            <label class="col s4">red</label>
+            <label class="col s4">blue</label>
+            <label class="col s4">yellow</label>
+          </div>
+        </div>
+        <a class="btn admin-btn" (click)="submit()">Create</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">View Armors</span>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Rarity</th>
+            <th>ID</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let item of armors">
+            <td>{{item.name}}</td>
+            <td>{{item.rarity}}</td>
+            <td>{{item.id}}</td>
+            <td><a (click)="delete(item.id)" class="red-text">X</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

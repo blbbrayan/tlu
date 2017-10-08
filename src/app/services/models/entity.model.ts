@@ -7,8 +7,8 @@ export class Entity{
   red: number; // health, strength
   blue: number; // mana, intelligence
   yellow: number; // agility, crit-chance
-  effects: Effect[] = [];
 
+  effects: Effect[] = [];
   stats: Stats;
 
 }
