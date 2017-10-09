@@ -18,7 +18,12 @@ export class ItemWeaponComponent implements OnInit {
   selectedRarity: string;
   selectedAbility: string;
   abilities: any[];
-  rarities: any[] =  ["Common", "Uncommon", "Rare", "Legendary", "Mythic"];
+  rarities: any[] = ["Common",
+    "Rare",
+    "Epic",
+    "Legendary",
+    "Mythic"
+  ];
 
   constructor(private database: DataService, private abilityservice: AbilityService) {
     setTimeout(() => window['$']('.dropdown-button').dropdown(), 200);

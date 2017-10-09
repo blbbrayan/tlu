@@ -11,7 +11,12 @@ export class ItemArmorComponent implements OnInit {
 
   item: Armor = new Armor();
   armors: any[];
-  rarities: any[] =  ["Common", "Uncommon", "Rare", "Legendary", "Mythic"];
+  rarities: any[] = ["Common",
+    "Rare",
+    "Epic",
+    "Legendary",
+    "Mythic"
+  ];
 
   constructor(private database: DataService) {
     setTimeout(() => window['$']('.dropdown-button').dropdown(), 200);

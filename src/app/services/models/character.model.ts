@@ -10,7 +10,7 @@ export class Character extends Entity {
   id: string;
   raceId: string;
   inventoryIds: { itemId: string, amount: number }[];
-  equippedIds: { armor: string[], weapons: string[] }[];
+  equippedIds: { armor: any[], weapons: any[] };
 
   inventory: { item: Item, amount: number }[];
   equipped: { armor: Armor[], weapons: Weapon[] };
@@ -29,7 +29,7 @@ export class Character extends Entity {
     this.blue = blue || 6;
     this.yellow = yellow || 6;
     this.inventoryIds = [];
-    this.equippedIds = [];
+    this.equippedIds = {armor: [], weapons: []};
   }
 
 }

@@ -60,4 +60,12 @@ export class DataService {
     return key;
   }
 
+  //
+
+  getItem(id, callback){
+    this.get('items', id, item=>
+      this.get(item.db, item.id, value=> callback(value))
+    )
+  }
+
 }

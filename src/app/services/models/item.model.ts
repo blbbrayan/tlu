@@ -1,5 +1,6 @@
 export class Item{
     id: string;
+    itemId: string;
     name: string;
     type: string;
 

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../services/account.service";
 import {DataService} from "../services/data.service";
+import {Character} from "../services/models/character.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-inventory',
@@ -9,54 +11,64 @@ import {DataService} from "../services/data.service";
 })
 export class InventoryComponent implements OnInit {
 
-  inventory: any[];
-  weapons: string[];
-  armor: string[];
-
   selectMode = true;
   selectedItem: any;
+  character: Character;
 
-  constructor(private accountService: AccountService, private dataService: DataService) {
+  constructor(private accountService: AccountService, private dataService: DataService, private router: Router) {
+    if (!this.accountService.character)
+      this.router.navigate(['/login']);
+    this.character = this.accountService.character;
+    console.log('character', this.character);
   }
 
   ngOnInit() {
-    this.armor = [];
+
   }
 
-  getInventory(){
-    let inventory = this.accountService.character.inventory;
-    if(inventory === undefined){
-      let ids = this.accountService.character.inventoryIds;
-      // ids.forEach(id=>this.dataService.get('item/'))
-    }
-  }
-
-  equip(item) {
-    switch (item.type) {
+  equip(item: {item: any, amount: number}, i) {
+    let character = this.character;
+    if (character.equippedIds === undefined)
+      character.equippedIds = {armor: [], weapons: []};
+    switch (item.item.type) {
       case "armor":
-        if (this.armor.length < 4)
-          this.armor.push(item);
+        if (character.equipped.armor.length < 4)
+          character.equippedIds.armor.push(item.item.itemId);
         break;
       case "weapon":
-        if (this.weapons.length < 4)
-          this.weapons.push(item);
+        if (character.equipped.weapons.length < 4)
+          character.equippedIds.weapons.push(item.item.itemId);
         break;
     }
-    this.inventory.splice(this.inventory.indexOf(item), 1);
+    character.inventoryIds[i].amount--;
+    if(character.inventoryIds[i].amount <= 0)
+      character.inventoryIds.splice(character.inventory.indexOf(item), 1);
+    this.accountService.saveCharacter();
     this.selectItem(item, true);
     this.stopSelect();
   }
 
   isEquipped(item) {
-    return this.armor.indexOf(item) !== -1 || this.weapons.indexOf(item) !== -1
+    return this.accountService.character.equipped.armor.indexOf(item) !== -1 || this.accountService.character.equipped.weapons.indexOf(item) !== -1
   }
 
   unequip(item) {
+    let character = this.accountService.character;
     if (item.type === "armor")
-      this.armor.splice(this.armor.indexOf(item), 1);
+        character.equippedIds.armor.splice(character.equipped.armor.indexOf(item), 1);
+    else {
+      if(character.equippedIds.weapons.length <= 1)
+        return null;
+      character.equippedIds.weapons.splice(character.equipped.weapons.indexOf(item), 1);
+    }
+
+    let invItem = character.inventoryIds.find(e => e.itemId === item.itemId);
+    console.log('invItem', invItem, item);
+    if(invItem)
+      invItem.amount++;
     else
-      this.weapons.splice(this.weapons.indexOf(item), 1);
-    this.inventory.push(item);
+      this.accountService.character.inventoryIds.push({itemId: item.itemId, amount: 1});
+    this.accountService.saveCharacter();
   }
 
   rarityPipe = [
@@ -65,7 +77,7 @@ export class InventoryComponent implements OnInit {
     "Epic",
     "Legendary",
     "Mythic",
-  ]
+  ];
 
   keys(obj) {
     return obj ? Object.keys(obj.stats) : [];
@@ -73,7 +85,7 @@ export class InventoryComponent implements OnInit {
 
   selectItem(item, override?) {
     if (this.selectMode || override)
-      this.selectedItem = item;
+      this.selectedItem = item.item ? item.item : item;
   }
 
   stopSelect() {
