@@ -3,7 +3,7 @@
         <span class="card-title"><i class="material-icons" [routerLink]="['/home']">chevron_left</i>Inventory</span>
         <div class="row">
             <div class="col m3">
-                <div class="item" [ngClass]="{'active': selectedItem === i}" *ngFor="let item of character.inventory; let i = index" (mouseover)="selectItem(character.inventory[i])" (click)="equip(character.inventory[i], i)">
+                <div class="item" [ngClass]="{'active': selectedItem === i}" *ngFor="let item of inventory; let i = index" (mouseover)="selectItem(inventory[i])" (click)="equip(inventory[i], i)">
                     <span>{{item.item.name}} x{{item.amount}}</span>
                 </div>
             </div>
@@ -19,11 +19,11 @@
             </div>
         </div>
         <h3>Weapons</h3>
-        <div class="item" *ngFor="let item of character.equipped.weapons; let i = index" (mouseover)="selectItem(character.equipped.weapons[i])" (click)="unequip(item)">
+        <div class="item" *ngFor="let item of equipped.weapons; let i = index" (mouseover)="selectItem(equipped.weapons[i])" (click)="unequip(item)">
             <span>{{item.name}}</span>
         </div>
         <h3>Armor</h3>
-        <div class="item" *ngFor="let item of character.equipped.armor; let i = index" (mouseover)="selectItem(character.equipped.armor[i])" (click)="unequip(item)">
+        <div class="item" *ngFor="let item of equipped.armor; let i = index" (mouseover)="selectItem(equipped.armor[i])" (click)="unequip(item)">
             <span>{{item.name}}</span>
         </div>
     </div>

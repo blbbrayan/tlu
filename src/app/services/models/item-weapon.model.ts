@@ -9,8 +9,6 @@ export class Weapon extends Item{
     rarity: number;
     abilityName: string;
 
-    ability: Ability;
-
     constructor(){
         super('weapon');
         this.stats = new Stats(0,0,0).set({});
@@ -23,7 +21,6 @@ export class Weapon extends Item{
         this.level = level;
         this.rarity = rarity;
         this.stats = stats;
-        this.ability = ability;
         return this;
     }
 

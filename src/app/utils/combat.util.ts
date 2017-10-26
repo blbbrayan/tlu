@@ -1,7 +1,7 @@
 import {Ability} from "../services/models/ability.model";
-import {Character} from "../services/models/character.model";
 import {Entity} from "../services/models/entity.model";
 import {Effect} from "../services/models/effect.model";
+import {AccountService} from "../services/account.service";
 
 export class CombatUtil {
 
@@ -9,12 +9,12 @@ export class CombatUtil {
     this.runEffects(entity, "onTurnStart");
   }
 
-  static endTurn(entity: Entity) {
+  static endTurn(entity: Entity, account: AccountService) {
     this.runEffects(entity, "onTurnEnd");
-    if (entity instanceof Character)
-      entity.equipped.weapons.forEach(weapon => {
-        if (weapon.ability.interval > 0)
-          weapon.ability.interval--
+    if (entity === account.character)
+      account.abilities.forEach(ability => {
+        if (ability.interval > 0)
+          ability.interval--
       })
   }
 

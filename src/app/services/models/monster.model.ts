@@ -6,7 +6,7 @@ export class Monster extends Entity {
   level: number;
 
   constructor() {
-    super();
+    super('monster');
     this.name = "";
     this.red = 0;
     this.blue = 0;

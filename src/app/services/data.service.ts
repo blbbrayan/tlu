@@ -46,8 +46,8 @@ export class DataService {
     });
   }
 
-  delete(path: string) {
-    this.database(path).remove();
+  delete(path: string, key?: string) {
+    this.database(path + this.key(key)).remove();
   }
 
   save(path, key, obj) {

@@ -4,6 +4,7 @@ import {DataService} from "../services/data.service";
 import {AccountService} from "../services/account.service";
 import {ObjectUtil} from "../utils/object.util";
 import {Character} from "../services/models/character.model";
+import {GameUtil} from "../utils/game.util";
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,7 @@ export class HomeComponent implements OnInit {
 
   player: Character;
 
-  constructor(private database: DataService, private accountService: AccountService, private router: Router) {
-  }
+  constructor(private database: DataService, private accountService: AccountService, private router: Router) {}
 
   ngOnInit() {
     if (!this.accountService.character)
@@ -33,8 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   battle() {
-    // this.data.selectedMonster = this.data.monsters[Math.floor(Math.random() * this.data.monsters.length-1) + 1];
-    this.router.navigate(['/play/battle']);
+    GameUtil.createRoom([this.accountService.character], [], this.database, this.accountService, this.router);
   }
 
 }

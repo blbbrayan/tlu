@@ -24,7 +24,7 @@ constructor(red, blue, yellow, level?){
     this.intelligence = blue + 5 + (level * 2);
     this.agility = yellow + 5 + (level * 2);
     this.crit = yellow * .3 + 5 + (level * 0.3);
-    this.speed = (yellow * 2) * (Math.random() * 100) + (level * 2);
+    this.speed = 4 + Math.floor(yellow / 12);
 }
 
 set(stats: any){

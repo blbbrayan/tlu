@@ -19,7 +19,7 @@
     <div class="card col s8">
       <span class="card-title">Quest Postings</span>
       <div>
-        <a class="btn" (click)="battle()">battle</a>
+        <a class="btn" *ngIf="player" (click)="battle()">battle</a>
         <a class="btn" (click)="addItem()">add item</a>
       </div>
     </div>

@@ -3,13 +3,17 @@ import {Entity} from "./entity.model";
 
 export class Room{
 
-  turns: Turn[];
-  battleReport: any[];
+  id: string;
+  turns: Entity[];
+  turnIndex: 0;
+  turnEnd: boolean;
+  battleReport: Turn[];
 
-  allies: Entity[];
-  enemies: Entity[];
+  side1: Entity[];
+  side2: Entity[];
+  tiles: number[];
 
-  isHost: boolean;
+  host: boolean;
 
   addReport(report){
     this.battleReport.push(report);

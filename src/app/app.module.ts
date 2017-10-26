@@ -15,7 +15,6 @@ import {HomeComponent} from './home/home.component';
 import {AdminComponent} from './admin/admin.component';
 import {LoginComponent} from './login/login.component';
 import {CreateCharacterComponent} from './create-character/create-character.component';
-// import { PlaySingleBattleComponent } from './play/play-single-battle/play-single-battle.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import {AdminCharacterComponent} from './admin/admin-character/admin-character.component';
 import {AdminItemComponent} from './admin/item/item.component';
@@ -29,6 +28,7 @@ import {AdminRecipeComponent} from './admin/admin-recipe/admin-recipe.component'
 import { ItemArmorComponent } from './admin/item/item-armor/item-armor.component';
 import { ItemWeaponComponent } from './admin/item/item-weapon/item-weapon.component';
 import {Ability} from "./services/models/ability.model";
+import { PlayWorldComponent } from './play/play-world/play-world.component';
 // import { SingleBattleReportComponent } from './play/single-battle-report/single-battle-report.component';
 
 const ROUTES = [
@@ -40,7 +40,7 @@ const ROUTES = [
   //     {path: 'crafting', component: CraftingComponent},
   {path: 'create-character', component: CreateCharacterComponent},
   {path: 'play/garden', component: PlayGardenComponent},
-  //   {path: 'play/battle', component: PlaySingleBattleComponent},
+  {path: 'play/world', component: PlayWorldComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'admin/char', component: AdminCharacterComponent},
   {path: 'admin/item', component: AdminItemComponent},
@@ -62,7 +62,6 @@ const ROUTES = [
     HomeComponent,
     AdminComponent,
     PlayGardenComponent,
-    // PlaySingleBattleComponent,
     InventoryComponent,
     AdminCharacterComponent,
     AdminItemComponent,
@@ -75,6 +74,7 @@ const ROUTES = [
     AdminRecipeComponent,
     ItemArmorComponent,
     ItemWeaponComponent,
+    PlayWorldComponent,
     // SingleBattleReportComponent
   ],
   imports: [

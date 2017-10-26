@@ -12,14 +12,11 @@ export class Character extends Entity {
   inventoryIds: { itemId: string, amount: number }[];
   equippedIds: { armor: any[], weapons: any[] };
 
-  inventory: { item: Item, amount: number }[];
-  equipped: { armor: Armor[], weapons: Weapon[] };
-
   level: number;
   experience: number;
 
   constructor(name?, red?, blue?, yellow?) {
-    super();
+    super('character');
     const d = new Date();
     this.name = name || '';
     this.dateCreated = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
@@ -34,13 +31,14 @@ export class Character extends Entity {
 
 }
 
-export function characterRefresh(character) {
+export function characterRefresh(character, account) {
   console.log('character', character);
+  character.baseStats = new Stats(character.red, character.blue, character.yellow, character.level);
   character.stats = new Stats(character.red, character.blue, character.yellow, character.level);
-  character.equipped.weapons.forEach(weapon =>
+  account.equipped.weapons.forEach(weapon =>
     Object.keys(character.stats).forEach(stat => character.stats[stat] += weapon.stats[stat])
   );
-  character.equipped.weapons.forEach(weapon => weapon.ability.interval = 0);
+  account.abilities.forEach(ability => ability.interval = 0);
   character.effects = [];
   return character;
 }
